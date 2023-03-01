@@ -1,18 +1,17 @@
-import unittest
+import pytest
 
-from ..reinforce import PolicyNetwork
+from ..reinforce.policy_network import PolicyNetwork
 
-class TestPolicyNetwork(unittest.TestCase):
+def test_policy_network():
+    policy_network = PolicyNetwork()
+    assert policy_network is not None
+    assert policy_network.shared_net is not None
 
-    def setUp(self):
-        self.policy_network = PolicyNetwork(4, 2)
 
-    def test_policy_network(self):
-        self.assertEqual(self.policy_network.state_size, 4)
-        self.assertEqual(self.policy_network.action_size, 2)
-
-    def test_policy_network_forward(self):
-        self.assertEqual(self.policy_network.forward([1, 2, 3, 4]), 2)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_policy_network_forward():
+    policy_network = PolicyNetwork()
+    assert policy_network is not None
+    assert policy_network.forward(1) is not None
+    assert policy_network.forward(1).shape == (1, 2)
+    assert policy_network.forward(1).sum() == 1
+    assert policy_network.forward(1).max() <= 1

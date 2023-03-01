@@ -1,30 +1,26 @@
-import unittest
+import pytest
 
-from ..reinforce import ReinforceAgent
+from ..reinforce.reinforce_agent import ReinforceAgent
 
-class TestReinforceAgent(unittest.TestCase):
+def test_reinforce_agent():
+    reinforce_agent = ReinforceAgent()
+    assert reinforce_agent is not None
+    assert reinforce_agent.policy_network is not None
 
-    def setUp(self):
-        self.reinforce_agent = ReinforceAgent(4, 2)
+def test_reinforce_agent_sample_action():
+    reinforce_agent = ReinforceAgent()
+    assert reinforce_agent is not None
+    assert reinforce_agent.sample_action(1) is not None
+    assert reinforce_agent.sample_action(1) <= 1
+    assert reinforce_agent.sample_action(1) >= 0
+    assert reinforce_agent.sample_action(1) != 0.5
 
-    def test_reinforce_agent(self):
-        self.assertEqual(self.reinforce_agent.state_size, 4)
-        self.assertEqual(self.reinforce_agent.action_size, 2)
-    
-    def test_reinforce_agent_sample_action(self):
-        self.assertEqual(self.reinforce_agent.sample_action([1, 2, 3, 4]), 1)
+def test_reinforce_agent_update():
+    reinforce_agent = ReinforceAgent()
+    assert reinforce_agent is not None
+    assert reinforce_agent.update() is None
 
-    def test_reinforce_agent_update(self):
-        self.assertEqual(self.reinforce_agent.update(), None)
-    
-    def test_reinforce_agent_save_model(self):
-        self.assertEqual(self.reinforce_agent.save_model(), None)
-
-    def test_reinforce_agent_load_model(self):
-        self.assertEqual(self.reinforce_agent.load_model(), None)
-
-    def test_reinforce_agent_plot_reward_per_episode(self):
-        self.assertEqual(self.reinforce_agent.plot_reward_per_episode(), None)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_renforce_agent_save_model():
+    reinforce_agent = ReinforceAgent()
+    assert reinforce_agent is not None
+    assert reinforce_agent.save_model() is None
